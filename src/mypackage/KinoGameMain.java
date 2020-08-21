@@ -6,6 +6,7 @@
 package mypackage;
 
 import java.util.Arrays;
+import java.util.Map;
 import myclasses.NumbersBoard;
 
 /**
@@ -29,6 +30,8 @@ public class KinoGameMain {
        
         x.runADraw();
         x.showDrawNumbers();
+        
+        Map x;
 
       ///  Integer[] kinoNumbers = x.getTheArrayOfKinoNumbers();
 

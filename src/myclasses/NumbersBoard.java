@@ -79,7 +79,7 @@ public class NumbersBoard implements IKino {
 
     }
 
-    public Integer setTheBetMoney(Integer amount) {
+    public void setTheBetMoney(Integer amount) {
         Integer[] betMoney_Values = betMoney_Values();
         List tempList = Arrays.asList(betMoney_Values);
         Iterator tempIterator = tempList.listIterator();
@@ -97,11 +97,11 @@ public class NumbersBoard implements IKino {
             }
 
         }
-        IKino.moneyBet = amount;
-        return (amount);
+
+        moneyBet(amount);
     }
 
-    public Integer setTheRollPlays(Integer amount) {
+    public void setTheRollPlays(Integer amount) {
         Integer[] rollPlays = rollPlays_Values();
         List tempList = Arrays.asList(rollPlays);
         Iterator tempIterator = tempList.listIterator();
@@ -119,7 +119,7 @@ public class NumbersBoard implements IKino {
             }
 
         }
-        return (amount);
+        numberOfDraws(amount);
     }
 
     //////////For Loop To Position The Numbers To The Array////////
@@ -222,7 +222,7 @@ public class NumbersBoard implements IKino {
 
     @Override
     public void calculateEarnings() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int totalEarning = totalEarnings(amouRandNumb, amouRandNumb)
     }
 
     @Override
@@ -283,6 +283,26 @@ public class NumbersBoard implements IKino {
             System.out.println(integer + " ,");
 
         }
+
+    }
+
+    @Override
+    public int moneyBet(int moneyBet) {
+
+        return (moneyBet);
+    }
+
+    @Override
+    public int numberOfDraws(int numberOfDraws) {
+        return (numberOfDraws);
+    }
+
+    @Override
+    public int totalEarnings(int moneyBet, int numberOfDraws) {
+        
+        int totalEarnings = (moneyBet * numberOfDraws);
+
+        return (totalEarnings);
 
     }
 

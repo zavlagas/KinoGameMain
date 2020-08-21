@@ -11,11 +11,11 @@ package myinterface;
  */
 public interface IKino {
     
-    int  moneyBet = 0;
+    int moneyBet(int moneyBet);
+          
+    int numberOfDraws(int numberOfDraws);
             
-    int numberOfDraws = 0;
-            
-    int totalEarnings = 0;
+    int totalEarnings(int moneyBet , int numberOfDraws);
    
     
     Integer[] betMoney_Values();
