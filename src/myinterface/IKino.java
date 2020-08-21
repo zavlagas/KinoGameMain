@@ -10,19 +10,25 @@ package myinterface;
  * @author User
  */
 public interface IKino {
-
-    int moneyBet = 0;
+    
+    int  moneyBet = 0;
+            
     int numberOfDraws = 0;
+            
     int totalEarnings = 0;
    
     
-    void betMoney_Values();
+    Integer[] betMoney_Values();
     
-    int rollPlays_Values();
+    Integer[] rollPlays_Values();
 
     void runADraw();
 
     void showDrawNumbers();
 
     void calculateEarnings();
+    
+    void printBetMoneyValues();
+    
+    void printRollPlaysValues();
 }

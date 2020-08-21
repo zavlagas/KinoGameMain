@@ -6,6 +6,7 @@
 package myclasses;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -76,6 +77,49 @@ public class NumbersBoard implements IKino {
         Integer[] randomStoreNumbs = new Integer[amountOfRandomNumbs];
         this.randomStoreNumbs = randomStoreNumbs;
 
+    }
+
+    public Integer setTheBetMoney(Integer amount) {
+        Integer[] betMoney_Values = betMoney_Values();
+        List tempList = Arrays.asList(betMoney_Values);
+        Iterator tempIterator = tempList.listIterator();
+        while (tempIterator.hasNext()) {
+            Integer tempNumber = (Integer) tempIterator.next();
+
+            if (tempNumber == amount) {
+
+                amount = tempNumber;
+
+            } else {
+
+                amount = null;
+
+            }
+
+        }
+        IKino.moneyBet = amount;
+        return (amount);
+    }
+
+    public Integer setTheRollPlays(Integer amount) {
+        Integer[] rollPlays = rollPlays_Values();
+        List tempList = Arrays.asList(rollPlays);
+        Iterator tempIterator = tempList.listIterator();
+        while (tempIterator.hasNext()) {
+            Integer tempNumber = (Integer) tempIterator.next();
+
+            if (tempNumber == amount) {
+
+                amount = tempNumber;
+
+            } else {
+
+                amount = null;
+
+            }
+
+        }
+        return (amount);
     }
 
     //////////For Loop To Position The Numbers To The Array////////
@@ -182,21 +226,64 @@ public class NumbersBoard implements IKino {
     }
 
     @Override
-    public void betMoney_Values() {
-        Integer [] array = new Integer[10];
-//        array[0] = 
-        
+    public Integer[] betMoney_Values() {
+        Integer[] bet_Values = new Integer[10];
+        bet_Values[0] = 1;
+        bet_Values[1] = 2;
+        bet_Values[2] = 3;
+        bet_Values[3] = 5;
+        bet_Values[4] = 10;
+        bet_Values[5] = 15;
+        bet_Values[6] = 20;
+        bet_Values[7] = 30;
+        bet_Values[8] = 50;
+        bet_Values[9] = 100;
+
+        return (bet_Values);
+
     }
 
     @Override
-    public int rollPlays_Values() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Integer[] rollPlays_Values() {
+        Integer[] roll_Values = new Integer[10];
+        roll_Values[0] = 2;
+        roll_Values[1] = 3;
+        roll_Values[2] = 4;
+        roll_Values[3] = 5;
+        roll_Values[4] = 6;
+        roll_Values[5] = 10;
+        roll_Values[6] = 20;
+        roll_Values[7] = 50;
+        roll_Values[8] = 100;
+        roll_Values[9] = 200;
+
+        return (roll_Values);
     }
 
-    
+    @Override
+    public void printBetMoneyValues() {
 
-   
-    
+        Integer[] tempArray = betMoney_Values();
+
+        for (Integer integer : tempArray) {
+
+            System.out.println(integer + " ,");
+
+        }
+
+    }
+
+    @Override
+    public void printRollPlaysValues() {
+
+        Integer[] tempArray = rollPlays_Values();
+
+        for (Integer integer : tempArray) {
+
+            System.out.println(integer + " ,");
+
+        }
+
+    }
+
 }
-
-
