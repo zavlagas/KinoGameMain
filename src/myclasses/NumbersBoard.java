@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
+
 import myinterface.IKino;
 
 /**
@@ -19,9 +19,12 @@ import myinterface.IKino;
 public class NumbersBoard implements IKino {
 
     private int amountOfNumbers;
-    private Integer[] kinoNumbers;
+    private Integer[][] kinoNumbers;
     private int amouRandNumb;
     private Integer[] randomStoreNumbs;
+    private int moneyBet;
+    private int numberOfDraws;
+    private int totalEarnings;
 
     public NumbersBoard() {
     }
@@ -29,8 +32,7 @@ public class NumbersBoard implements IKino {
     public NumbersBoard(int amountOfNumbers, int amouRandNumb) {
         this.amountOfNumbers = amountOfNumbers;
         this.amouRandNumb = amouRandNumb;
-//        setTheArrayOfKinoNumbers();
-//        setTheArrayOfRandomStoreNumbs();
+        setTheArrayOfKinoNumbers();
     }
 
     ///////////////////////////Getters/////////////////////////
@@ -43,7 +45,19 @@ public class NumbersBoard implements IKino {
         return (this.amouRandNumb);
     }
 
-    public Integer[] getTheArrayOfKinoNumbers() {
+    public int getMoneyBet() {
+        return (moneyBet);
+    }
+
+    public int getNumberOfDraws() {
+        return (numberOfDraws);
+    }
+
+    public int getTotalEarnings() {
+        return (totalEarnings);
+    }
+
+    public Integer[][] getTheArrayOfKinoNumbers() {
 
         return (this.kinoNumbers);
     }
@@ -62,11 +76,31 @@ public class NumbersBoard implements IKino {
         this.amouRandNumb = amouRandNumb;
     }
 
+    @Override
+    public void setMoneyBet(int moneyBet) {
+        this.moneyBet = moneyBet;
+    }
+
+    @Override
+    public void setNumberOfDraws(int numberOfDraws) {
+        this.numberOfDraws = numberOfDraws;
+    }
+
+    @Override
+    public void setTotalEarnings(int moneyBet, int numberOfDraws) {
+        moneyBet = getMoneyBet();
+        numberOfDraws = getNumberOfDraws();
+
+        int totalEarnings = (moneyBet * numberOfDraws);
+
+        this.totalEarnings = totalEarnings;
+    }
+
     public void setTheArrayOfKinoNumbers() {
 
         int amountOfLocalNumbers = getAmountOfNumbers();
-        Integer[] kinoNumbers = new Integer[amountOfLocalNumbers];
-        loopToAddNumbersToArray(kinoNumbers, amountOfNumbers);
+
+        Integer[][] kinoNumbers = loopToAddNumbersToArray(amountOfNumbers);
         this.kinoNumbers = kinoNumbers;
 
     }
@@ -89,6 +123,7 @@ public class NumbersBoard implements IKino {
             if (tempNumber == amount) {
 
                 amount = tempNumber;
+                setMoneyBet(amount);
 
             } else {
 
@@ -98,7 +133,6 @@ public class NumbersBoard implements IKino {
 
         }
 
-        moneyBet(amount);
     }
 
     public void setTheRollPlays(Integer amount) {
@@ -111,6 +145,7 @@ public class NumbersBoard implements IKino {
             if (tempNumber == amount) {
 
                 amount = tempNumber;
+                setNumberOfDraws(amount);
 
             } else {
 
@@ -119,17 +154,26 @@ public class NumbersBoard implements IKino {
             }
 
         }
-        numberOfDraws(amount);
+
     }
 
     //////////For Loop To Position The Numbers To The Array////////
-    public void loopToAddNumbersToArray(Integer[] kinoNumbers, int numbers) {
+    public Integer[][] loopToAddNumbersToArray(int numbers) {
+        int swift = 10;
+        int row_Index = (numbers / swift);
+        int column_Index = (numbers / row_Index);
 
-        for (int i = 0; i < numbers; i++) {
-            int number = (i + 1);
-            kinoNumbers[i] = number;
+        Integer[][] kinoNumbers = new Integer[row_Index][column_Index];
+        int number = 0;
+        for (int i = 0; i < row_Index; i++) {
+
+            for (int j = 0; j < column_Index; j++) {
+                number = number + 1;
+                kinoNumbers[i][j] = number;
+
+            }
         }
-
+        return (kinoNumbers);
     }
 
     public void loopToAddRandomNumbsToArray() {
@@ -222,7 +266,7 @@ public class NumbersBoard implements IKino {
 
     @Override
     public void calculateEarnings() {
-        int totalEarning = totalEarnings(amouRandNumb, amouRandNumb)
+
     }
 
     @Override
@@ -287,22 +331,20 @@ public class NumbersBoard implements IKino {
     }
 
     @Override
-    public int moneyBet(int moneyBet) {
+    public void printKinoNumbers() {
+        Integer[][] kinoNumbers = getTheArrayOfKinoNumbers();
+//        int number = 0;
+        for (int i = 0; i < kinoNumbers.length; i++) {
 
-        return (moneyBet);
-    }
+            for (int j = 0; j < 10; j++) {
+               // number = number + 1;
+               // kinoNumbers[i][j] = number;
+                System.out.printf("%-4d ", kinoNumbers[i][j]);
 
-    @Override
-    public int numberOfDraws(int numberOfDraws) {
-        return (numberOfDraws);
-    }
+            }
+            System.out.println();
 
-    @Override
-    public int totalEarnings(int moneyBet, int numberOfDraws) {
-        
-        int totalEarnings = (moneyBet * numberOfDraws);
-
-        return (totalEarnings);
+        }
 
     }
 

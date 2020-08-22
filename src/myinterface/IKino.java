@@ -10,16 +10,15 @@ package myinterface;
  * @author User
  */
 public interface IKino {
-    
-    int moneyBet(int moneyBet);
-          
-    int numberOfDraws(int numberOfDraws);
-            
-    int totalEarnings(int moneyBet , int numberOfDraws);
-   
-    
+
+   public void setMoneyBet(int moneyBet);
+
+    public void setNumberOfDraws(int numberOfDraws);
+
+    public void setTotalEarnings(int moneyBet , int numberOfDraws);
+
     Integer[] betMoney_Values();
-    
+
     Integer[] rollPlays_Values();
 
     void runADraw();
@@ -27,8 +26,11 @@ public interface IKino {
     void showDrawNumbers();
 
     void calculateEarnings();
-    
+
     void printBetMoneyValues();
-    
+
     void printRollPlaysValues();
+    
+    void printKinoNumbers();
+
 }

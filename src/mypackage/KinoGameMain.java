@@ -21,19 +21,7 @@ public class KinoGameMain {
     public static void main(String[] args) {
 
         NumbersBoard x = new NumbersBoard(80, 20);
-        
-        x.setTheArrayOfKinoNumbers();
-        x.setTheArrayOfRandomStoreNumbs();
-
-       // Integer[] randomNumbers = x.getTheArrayOfRandomStoreNumbs();
-        
-       
-        x.runADraw();
-        x.showDrawNumbers();
-        
-        Map x;
-
-      ///  Integer[] kinoNumbers = x.getTheArrayOfKinoNumbers();
 
     }
+
 }
