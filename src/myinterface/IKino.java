@@ -11,21 +11,25 @@ package myinterface;
  */
 public interface IKino {
 
-   public void setMoneyBet(int moneyBet);
+    void setMoneyBet(int moneyBet);
 
-    public void setNumberOfDraws(int numberOfDraws);
+    void setNumberOfDraws(int numberOfDraws);
 
-    public void setTotalEarnings(int moneyBet , int numberOfDraws);
+    void setTotalEarnings(int earning);
 
     Integer[] betMoney_Values();
 
     Integer[] rollPlays_Values();
+    
+    int declareWinnerSide();
 
     void runADraw();
 
     void showDrawNumbers();
 
-    void calculateEarnings();
+    int calculateEarnings(int number);
+    
+    int checkIfWins(int userChoice);
 
     void printBetMoneyValues();
 

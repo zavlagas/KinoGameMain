@@ -24,6 +24,7 @@ public class NumbersBoard implements IKino {
     private Integer[] randomStoreNumbs;
     private int moneyBet;
     private int numberOfDraws;
+    private int earning;
     private int totalEarnings;
 
     public NumbersBoard() {
@@ -57,6 +58,12 @@ public class NumbersBoard implements IKino {
         return (totalEarnings);
     }
 
+    public int getEarnings() {
+
+        return (earning);
+
+    }
+
     public Integer[][] getTheArrayOfKinoNumbers() {
 
         return (this.kinoNumbers);
@@ -86,14 +93,19 @@ public class NumbersBoard implements IKino {
         this.numberOfDraws = numberOfDraws;
     }
 
-    @Override
-    public void setTotalEarnings(int moneyBet, int numberOfDraws) {
+    public void setEarnings(int moneyBet, int numberOfDraws) {
         moneyBet = getMoneyBet();
         numberOfDraws = getNumberOfDraws();
 
-        int totalEarnings = (moneyBet * numberOfDraws);
+        int earning = (moneyBet * numberOfDraws);
 
-        this.totalEarnings = totalEarnings;
+        this.earning = earning;
+    }
+
+    @Override
+    public void setTotalEarnings(int earning) {
+
+        this.totalEarnings += earning;
     }
 
     public void setTheArrayOfKinoNumbers() {
@@ -214,8 +226,10 @@ public class NumbersBoard implements IKino {
 
         return (randomNumber);
     }
+////////////METHODS INHERITED BY INTERFACE IKINO/////////////////////////////////
 
-    public int calculateIfEvenWins() {
+    @Override
+    public int declareWinnerSide() {
         Integer[] randomStoreNumbs = getTheArrayOfRandomStoreNumbs();
         int even = 0;
         int odd = 0;
@@ -248,7 +262,32 @@ public class NumbersBoard implements IKino {
 
     }
 
-    ////////////METHODS INHERITED BY INTERFACE IKINO/////////////////////////////////
+    @Override
+    public int checkIfWins(int userChoice) {
+        int number;
+        int winnerSide = declareWinnerSide();
+
+        if ((winnerSide == 1) && (winnerSide == userChoice)) {
+            number = 2;
+
+        } else if ((winnerSide == -1) && (winnerSide == userChoice)) {
+
+            number = 2;
+
+        } else if ((winnerSide == 0) && (winnerSide == userChoice)) {
+
+            number = 4;
+
+        } else {
+
+            number = 0;
+
+        }
+
+        calculateEarnings(number);
+        return (number);
+    }
+
     @Override
     public void runADraw() {
         loopToAddRandomNumbsToArray();
@@ -265,7 +304,14 @@ public class NumbersBoard implements IKino {
     }
 
     @Override
-    public void calculateEarnings() {
+    public int calculateEarnings(int number) {
+        int earnings = getEarnings();
+
+        int calculate = (earnings * number);
+
+        setTotalEarnings(earning);
+
+        return (calculate);
 
     }
 
@@ -304,6 +350,7 @@ public class NumbersBoard implements IKino {
         return (roll_Values);
     }
 
+    ///////////////PRINT///////////////
     @Override
     public void printBetMoneyValues() {
 
@@ -337,8 +384,8 @@ public class NumbersBoard implements IKino {
         for (int i = 0; i < kinoNumbers.length; i++) {
 
             for (int j = 0; j < 10; j++) {
-               // number = number + 1;
-               // kinoNumbers[i][j] = number;
+                // number = number + 1;
+                // kinoNumbers[i][j] = number;
                 System.out.printf("%-4d ", kinoNumbers[i][j]);
 
             }
@@ -348,4 +395,5 @@ public class NumbersBoard implements IKino {
 
     }
 
+   
 }
