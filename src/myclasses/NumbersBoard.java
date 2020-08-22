@@ -355,10 +355,10 @@ public class NumbersBoard implements IKino {
     public void printBetMoneyValues() {
 
         Integer[] tempArray = betMoney_Values();
-
+        String euro = "\u20ac";
         for (Integer integer : tempArray) {
 
-            System.out.println(integer + " ,");
+            System.out.printf("%-2d%s | ", integer,euro);
 
         }
 
@@ -370,8 +370,8 @@ public class NumbersBoard implements IKino {
         Integer[] tempArray = rollPlays_Values();
 
         for (Integer integer : tempArray) {
-
-            System.out.println(integer + " ,");
+             System.out.printf("x%-3d | ", integer);
+            
 
         }
 
