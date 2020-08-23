@@ -6,7 +6,6 @@
 package myclasses;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -26,6 +25,7 @@ public class NumbersBoard implements IKino {
     private int numberOfDraws;
     private int earning;
     private int totalEarnings;
+    private int side;
 
     public NumbersBoard() {
     }
@@ -34,6 +34,7 @@ public class NumbersBoard implements IKino {
         this.amountOfNumbers = amountOfNumbers;
         this.amouRandNumb = amouRandNumb;
         setTheArrayOfKinoNumbers();
+        setTheArrayOfRandomStoreNumbs();
     }
 
     ///////////////////////////Getters/////////////////////////
@@ -93,9 +94,9 @@ public class NumbersBoard implements IKino {
         this.numberOfDraws = numberOfDraws;
     }
 
-    public void setEarnings(int moneyBet, int numberOfDraws) {
-        moneyBet = getMoneyBet();
-        numberOfDraws = getNumberOfDraws();
+    public void setEarnings() {
+        int moneyBet = getMoneyBet();
+        int numberOfDraws = getNumberOfDraws();
 
         int earning = (moneyBet * numberOfDraws);
 
@@ -104,7 +105,7 @@ public class NumbersBoard implements IKino {
 
     @Override
     public void setTotalEarnings(int earning) {
-
+       
         this.totalEarnings += earning;
     }
 
@@ -122,50 +123,6 @@ public class NumbersBoard implements IKino {
         int amountOfRandomNumbs = getAmouRandNumb();
         Integer[] randomStoreNumbs = new Integer[amountOfRandomNumbs];
         this.randomStoreNumbs = randomStoreNumbs;
-
-    }
-
-    public void setTheBetMoney(Integer amount) {
-        Integer[] betMoney_Values = betMoney_Values();
-        List tempList = Arrays.asList(betMoney_Values);
-        Iterator tempIterator = tempList.listIterator();
-        while (tempIterator.hasNext()) {
-            Integer tempNumber = (Integer) tempIterator.next();
-
-            if (tempNumber == amount) {
-
-                amount = tempNumber;
-                setMoneyBet(amount);
-
-            } else {
-
-                amount = null;
-
-            }
-
-        }
-
-    }
-
-    public void setTheRollPlays(Integer amount) {
-        Integer[] rollPlays = rollPlays_Values();
-        List tempList = Arrays.asList(rollPlays);
-        Iterator tempIterator = tempList.listIterator();
-        while (tempIterator.hasNext()) {
-            Integer tempNumber = (Integer) tempIterator.next();
-
-            if (tempNumber == amount) {
-
-                amount = tempNumber;
-                setNumberOfDraws(amount);
-
-            } else {
-
-                amount = null;
-
-            }
-
-        }
 
     }
 
@@ -263,29 +220,28 @@ public class NumbersBoard implements IKino {
     }
 
     @Override
-    public int checkIfWins(int userChoice) {
-        int number;
-        int winnerSide = declareWinnerSide();
-
+    public boolean checkIfWins(int winnerSide, int userChoice) {
+        int number = 0;
+        boolean winner = false;
         if ((winnerSide == 1) && (winnerSide == userChoice)) {
+            winner = true;
             number = 2;
 
         } else if ((winnerSide == -1) && (winnerSide == userChoice)) {
-
+            winner = true;
             number = 2;
 
         } else if ((winnerSide == 0) && (winnerSide == userChoice)) {
-
+            winner = true;
             number = 4;
 
         } else {
 
-            number = 0;
+            winner = false;
 
         }
-
         calculateEarnings(number);
-        return (number);
+        return (winner);
     }
 
     @Override
@@ -358,7 +314,7 @@ public class NumbersBoard implements IKino {
         String euro = "\u20ac";
         for (Integer integer : tempArray) {
 
-            System.out.printf("%-2d%s | ", integer,euro);
+            System.out.printf("%-2d%s | ", integer, euro);
 
         }
 
@@ -370,8 +326,7 @@ public class NumbersBoard implements IKino {
         Integer[] tempArray = rollPlays_Values();
 
         for (Integer integer : tempArray) {
-             System.out.printf("x%-3d | ", integer);
-            
+            System.out.printf("x%-3d | ", integer);
 
         }
 
@@ -395,5 +350,14 @@ public class NumbersBoard implements IKino {
 
     }
 
-   
+    @Override
+    public void setSide(int side) {
+        this.side = side;
+    }
+
+    @Override
+    public int getSide() {
+        return (this.side);
+    }
+
 }

@@ -29,12 +29,17 @@ public interface IKino {
 
     int calculateEarnings(int number);
     
-    int checkIfWins(int userChoice);
+    boolean checkIfWins(int winnerSide , int userChoice);
 
     void printBetMoneyValues();
 
     void printRollPlaysValues();
     
     void printKinoNumbers();
+    
+    void setSide(int side);
+    
+    int getSide();
+    
 
 }
