@@ -27,7 +27,9 @@ public interface IKino {
 
     void showDrawNumbers();
 
-    int calculateEarnings(int number);
+    void calculateEarnings();
+    
+    void  calculateAndSetTotalEarnings();
     
     boolean checkIfWins(int winnerSide , int userChoice);
 

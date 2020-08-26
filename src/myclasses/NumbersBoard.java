@@ -26,6 +26,7 @@ public class NumbersBoard implements IKino {
     private int earning;
     private int totalEarnings;
     private int side;
+    private int multiply;
 
     public NumbersBoard() {
     }
@@ -57,6 +58,10 @@ public class NumbersBoard implements IKino {
 
     public int getTotalEarnings() {
         return (totalEarnings);
+    }
+
+    public int getMultiply() {
+        return multiply;
     }
 
     public int getEarnings() {
@@ -94,19 +99,19 @@ public class NumbersBoard implements IKino {
         this.numberOfDraws = numberOfDraws;
     }
 
-    public void setEarnings() {
-        int moneyBet = getMoneyBet();
-        int numberOfDraws = getNumberOfDraws();
-
-        int earning = (moneyBet * numberOfDraws);
+    public void setEarnings(int earning) {
 
         this.earning = earning;
     }
 
+    public void setMultiply(int multiply) {
+        this.multiply = multiply;
+    }
+
     @Override
-    public void setTotalEarnings(int earning) {
-       
-        this.totalEarnings += earning;
+    public void setTotalEarnings(int totalEarnings) {
+
+        this.totalEarnings = totalEarnings;
     }
 
     public void setTheArrayOfKinoNumbers() {
@@ -240,7 +245,9 @@ public class NumbersBoard implements IKino {
             winner = false;
 
         }
-        calculateEarnings(number);
+        setMultiply(number);
+        calculateEarnings();
+        calculateAndSetTotalEarnings();
         return (winner);
     }
 
@@ -260,14 +267,13 @@ public class NumbersBoard implements IKino {
     }
 
     @Override
-    public int calculateEarnings(int number) {
-        int earnings = getEarnings();
+    public void calculateEarnings() {
 
-        int calculate = (earnings * number);
+        int moneyBet = getMoneyBet();
+        int multiply = getMultiply();
 
-        setTotalEarnings(earning);
-
-        return (calculate);
+        int earnings = (moneyBet * multiply);
+        setEarnings(earnings);
 
     }
 
@@ -358,6 +364,18 @@ public class NumbersBoard implements IKino {
     @Override
     public int getSide() {
         return (this.side);
+    }
+
+    @Override
+    public void calculateAndSetTotalEarnings() {
+
+        int total_Earning = getTotalEarnings();
+        int earnings = getEarnings();
+
+        int final_Money = (total_Earning + earnings);
+
+        setTotalEarnings(final_Money);
+
     }
 
 }

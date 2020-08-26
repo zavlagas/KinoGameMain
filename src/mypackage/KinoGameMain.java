@@ -24,11 +24,7 @@ public class KinoGameMain {
         Scanner userInput = new Scanner(System.in);
         NumbersBoard x = new NumbersBoard(80, 20);
 
-        printTables(x);
-        betMoney(userInput, x);
-        setRolls(userInput, x);
-        betSide(userInput, x);
-        runTheKino(x);
+        hideMethods(userInput, x);
 
     }
 
@@ -124,11 +120,13 @@ public class KinoGameMain {
     }
 
     public static void runTheKino(NumbersBoard x) {
+
         int earnings = 0;
         int times = x.getNumberOfDraws();
         int side = x.getSide();
         for (int i = 0; i < times; i++) {
             x.runADraw();
+            System.out.println("-------------------------------------------");
             System.out.print("Roll " + (i + 1) + " : ");
             x.showDrawNumbers();
             int win = x.declareWinnerSide();
@@ -136,12 +134,14 @@ public class KinoGameMain {
             System.out.println(answer);
             boolean winOrLose = x.checkIfWins(win, side);
             earnings = winOrLoseIfElse(winOrLose, x);
-            x.setTotalEarnings(earnings);
+            
 
         }
 
         int total_Earnings = x.getTotalEarnings();
-        System.out.println("Your Total Earnings Are " + total_Earnings);
+        System.out.println("=======================================================");
+        System.out.println("Your Total Earnings Are :" + total_Earnings + " \u20ac");
+        System.out.println("=======================================================");
 
     }
 
@@ -149,9 +149,8 @@ public class KinoGameMain {
         int earnings = 0;
         if (answer == true) {
 
-            x.setEarnings();
             earnings = x.getEarnings();
-            System.out.println("You Win " + earnings);
+            System.out.println("You Win " + earnings + " \u20ac");
         } else {
 
             System.out.println("You Loose");
@@ -165,17 +164,60 @@ public class KinoGameMain {
         switch (number) {
 
             case (1):
-                answer = ("Even Wins");
+                answer = (" [Even Wins]");
                 break;
             case (-1):
-                answer = ("Odd Wins");
+                answer = (" [Odd Wins]");
                 break;
             case (0):
-                answer = ("Draw Wins");
+                answer = (" [Draw Wins]");
                 break;
 
         }
         return (answer);
+    }
+
+    public static void hideMethods(Scanner userInput, NumbersBoard x) {
+        boolean continuePlaying = false;
+        do {
+            printTables(x);
+            betMoney(userInput, x);
+            setRolls(userInput, x);
+            betSide(userInput, x);
+            runTheKino(x);
+            continuePlaying = switchStatement(userInput, "Do You Want To Bet Again: [YES / NO]");
+
+        } while (continuePlaying == true);
+    }
+
+    public static boolean switchStatement(Scanner in, String question) {
+        Boolean decision = false;
+        System.out.println(question + " ");
+        String input = in.next();
+
+        switch (input) {
+            case "Yes":
+            case "YES":
+            case "Y":
+            case "yes":
+            case "y":
+                decision = true;
+                break;
+            case "No":
+            case "NO":
+            case "N":
+            case "no":
+            case "n":
+                decision = false;
+                break;
+            default:
+                System.out.println("Bad Input . Try Again");
+                decision = switchStatement(in, question);
+                break;
+        }
+
+        return (decision);
+
     }
 
 }
